@@ -1,8 +1,13 @@
 <template>
-  <h1>Hello world</h1>
+  <Toast />
 </template>
 
-<script></script>
+<script>
+import Toast from "./components/toast/Toast.vue";
+export default {
+  components: { Toast },
+};
+</script>
 
 <style>
 #app {

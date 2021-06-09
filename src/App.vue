@@ -1,11 +1,20 @@
 <template>
-  <Toast />
+  <button @click="showToast = true">Show Toast</button>
+  <Toast
+    message="Message has been sent"
+    title="Yes"
+    :show="showToast"
+    @hide="showToast = false"
+  />
 </template>
 
 <script>
 import Toast from "./components/toast/Toast.vue";
 export default {
   components: { Toast },
+  data: () => ({
+    showToast: false,
+  }),
 };
 </script>
 

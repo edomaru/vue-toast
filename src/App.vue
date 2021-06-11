@@ -4,8 +4,8 @@
     message="Message has been sent"
     :show="showToast"
     @hide="showToast = false"
-    type="error"
-    title="Ups"
+    type="success"
+    position="top-left"
   />
 </template>
 

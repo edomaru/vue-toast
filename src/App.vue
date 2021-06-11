@@ -2,10 +2,10 @@
   <button @click="showToast = true">Show Toast</button>
   <Toast
     message="Message has been sent"
-    title="Yes"
     :show="showToast"
     @hide="showToast = false"
-    type="info"
+    type="error"
+    title="Ups"
   />
 </template>
 

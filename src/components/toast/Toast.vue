@@ -4,7 +4,7 @@
       <component :is="toastIcon"></component>
     </div>
     <div class="toast-content">
-      <div class="toast-title">{{ title }}</div>
+      <div class="toast-title">{{ toastTitle }}</div>
       <div class="toast-message">{{ message }}</div>
     </div>
     <button class="toast-button" @click="$emit('hide')">&times;</button>
@@ -39,7 +39,7 @@ export default {
     },
     title: {
       type: String,
-      default: "Success",
+      default: null,
     },
     show: {
       type: Boolean,
@@ -48,14 +48,27 @@ export default {
     type: {
       type: String,
       default: "success",
+      validator: function (value) {
+        return ["success", "warning", "error"].indexOf(value) !== -1;
+      },
     },
   },
   computed: {
     toastType() {
-      return `toast-${this.type}`;
+      return `toast-${this.getType}`;
     },
     toastIcon() {
-      return `icon-${this.type}`;
+      return `icon-${this.getType}`;
+    },
+    getType() {
+      return ["success", "warning", "error"].indexOf(this.type) === -1
+        ? "success"
+        : this.type;
+    },
+    toastTitle() {
+      return this.title
+        ? this.title
+        : this.type.charAt(0).toUpperCase() + this.type.slice(1);
     },
   },
   components: {

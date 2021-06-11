@@ -5,6 +5,7 @@
     title="Yes"
     :show="showToast"
     @hide="showToast = false"
+    type="info"
   />
 </template>
 

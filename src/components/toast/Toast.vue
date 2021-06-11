@@ -1,7 +1,7 @@
 <template>
-  <div class="toast" v-show="show">
+  <div class="toast" :class="toastType" v-show="show">
     <div class="toast-icon">
-      <IconSuccess />
+      <component :is="toastIcon"></component>
     </div>
     <div class="toast-content">
       <div class="toast-title">{{ title }}</div>
@@ -45,6 +45,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    type: {
+      type: String,
+      default: "success",
+    },
+  },
+  computed: {
+    toastType() {
+      return `toast-${this.type}`;
+    },
+    toastIcon() {
+      return `icon-${this.type}`;
+    },
   },
   components: {
     IconError,
@@ -57,7 +69,6 @@ export default {
 <style scoped>
 .toast {
   width: 300px;
-  background: #ecfdf5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,7 +81,6 @@ export default {
   content: "";
   width: 4px;
   height: 100%;
-  background: #34d399;
   position: absolute;
   top: 0;
   left: 0;
@@ -79,13 +89,47 @@ export default {
 .toast-icon {
   width: 16px;
   height: 16px;
-  background: #34d399;
   border-radius: 50%;
   padding: 7px;
 }
 
-.toast-icon svg {
+.toast-success .toast-icon svg {
   fill: #ecfdf5;
+}
+
+.toast-success {
+  background: #ecfdf5;
+}
+
+.toast-success::before,
+.toast-success .toast-icon {
+  background: #34d399;
+}
+
+.toast-warning .toast-icon svg {
+  fill: #fffbeb;
+}
+
+.toast-warning {
+  background: #fffbeb;
+}
+
+.toast-warning::before,
+.toast-warning .toast-icon {
+  background: #f59e0b;
+}
+
+.toast-error .toast-icon svg {
+  fill: #f3f2f2;
+}
+
+.toast-error {
+  background: #fef2f2;
+}
+
+.toast-error::before,
+.toast-error .toast-icon {
+  background: #ef4444;
 }
 
 .toast-content {

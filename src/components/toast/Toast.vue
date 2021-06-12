@@ -70,7 +70,7 @@ export default {
         : this.type;
     },
     getPosition() {
-      return ["buttom-left", "bottom-right", "top-left", "top-right"].indexOf(
+      return ["bottom-left", "bottom-right", "top-left", "top-right"].indexOf(
         this.position
       ) === -1
         ? "bottom-right"

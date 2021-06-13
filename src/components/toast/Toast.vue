@@ -1,14 +1,16 @@
 <template>
-  <div class="toast" :class="toastClasses" v-show="show">
-    <div class="toast-icon">
-      <component :is="toastIcon"></component>
+  <transition :name="transitionName">
+    <div class="toast" :class="toastClasses" v-show="show">
+      <div class="toast-icon">
+        <component :is="toastIcon"></component>
+      </div>
+      <div class="toast-content">
+        <div class="toast-title">{{ toastTitle }}</div>
+        <div class="toast-message">{{ message }}</div>
+      </div>
+      <button class="toast-button" @click="$emit('hide')">&times;</button>
     </div>
-    <div class="toast-content">
-      <div class="toast-title">{{ toastTitle }}</div>
-      <div class="toast-message">{{ message }}</div>
-    </div>
-    <button class="toast-button" @click="$emit('hide')">&times;</button>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -58,6 +60,15 @@ export default {
     },
   },
   computed: {
+    transitionName() {
+      const transitions = {
+        "top-left": "ltr",
+        "bottom-left": "ltr",
+        "top-right": "rtl",
+        "bottom-right": "rtl",
+      };
+      return transitions[this.getPosition];
+    },
     toastType() {
       return `toast-${this.getType}`;
     },
@@ -209,5 +220,23 @@ export default {
   position: fixed;
   right: 20px;
   top: 20px;
+}
+.rtl-enter-active,
+.rtl-leave-active,
+.ltr-enter-active,
+.ltr-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.rtl-enter-from,
+.rtl-leave-to {
+  transform: translateX(100%);
+}
+.ltr-enter-from,
+.ltr-leave-to {
+  transform: translateX(-100%);
+}
+.rtl-leave-to,
+.ltr-leave-to {
+  opacity: 0;
 }
 </style>

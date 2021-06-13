@@ -5,7 +5,7 @@
     :show="showToast"
     @hide="showToast = false"
     type="success"
-    position="top-left"
+    position="top-right"
   />
 </template>
 
